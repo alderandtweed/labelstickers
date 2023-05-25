@@ -1,0 +1,136 @@
+<html>
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <title>Sticker Label Generator</title>
+    <style type="text/css">
+        .stickerLabel {
+            width: 1200px;
+            height: 694px;
+            border: 1px solid #000;
+            background-color: #fff;
+            padding: 12px;
+            position: relative;
+        }
+
+        .date {
+            position: absolute;
+            top: 10px;
+            right: 0;
+            font-size: 50px;
+        }
+
+        .project {
+            max-width: 90%;
+            /* added max-width */
+            font-size: 70px;
+            font-weight: bold;
+            text-align: center;
+            word-wrap: break-word;
+            /* added word-wrap */
+        }
+
+        .project-frame {
+            position: absolute;
+            height: 275px;
+            top: 100px;
+            right: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            /* removed padding-top, added padding */
+            overflow: hidden;
+            /* added overflow */
+        }
+
+        .supplier_item_number {
+            position: absolute;
+            top: 600px;
+            font-size: 60px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .room {
+            position: absolute;
+            top: 500px;
+            font-size: 70px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .createdby {
+            position: absolute;
+            text-transform: uppercase;
+            top: 400px;
+            font-size: 70px;
+            width: 100%;
+            text-align: center;
+        }
+
+        body {
+            font-family: lato
+        }
+    </style>
+</head>
+
+<body>
+
+    <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+    <script type="text/javascript">
+        function downloadStickerLabel() {
+            const stickerLabel = document.querySelector('.stickerLabel');
+            html2canvas(stickerLabel, {
+                    allowTaint: true,
+                    logging: true,
+                    useCORS: true
+                })
+                .then(canvas => {
+                    let link = document.createElement('a');
+                    link.download = 'StickerLabel.jpg';
+                    link.href = canvas.toDataURL('image/jpeg');
+                    link.click();
+                });
+        }
+
+        window.addEventListener('load', function() {
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const classList = ['project', 'supplier_item_number', 'room', 'createdby'];
+
+            classList.forEach(className => {
+                const element = document.querySelector('.' + className);
+                const paramValue = urlParams.get(className);
+                if (paramValue) {
+                    element.textContent = paramValue;
+                }
+            });
+
+
+            downloadStickerLabel();
+        });
+    </script>
+
+    <div class="stickerLabel">
+        <img src="https://1.bp.blogspot.com/-6IzfyuIA14E/YK9oqiv5F2I/AAAAAAAAA-o/mlWwiDpZfMAf47f4vnZmu8sO_28NMy0GQCLcBGAsYHQ/s16000/logo.png" />
+        <div class="date">05/17/2023</div>
+
+        <div class="project-frame">
+            <div class="project">
+                PETERSON ST GEORGE PROJECT- HEATHER ORDERS / Orders
+            </div>
+        </div>
+
+        <div class="supplier_item_number">Bradshaw - Item Number</div>
+        <div class="room">ENTRY</div>
+        <div class="createdby">savannaholsen</div>
+
+    </div>
+    <a href="javascript:downloadStickerLabel();">Download Sticker Label</a>
+</body>
+
+</html>
